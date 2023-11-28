@@ -36,7 +36,7 @@ const Header = () => {
       </>
     );
     return (
-      <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-2xl">
+      <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,12 +55,12 @@ const Header = () => {
                 />
               </svg>
             </div>
-            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul className="menu  bg-opacity-80 bg-black menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52">
               {menu2}
             </ul>
           </div>
           <div className="w-1/2">
-            <img className="w-1/2" src={logo}></img>
+            <img className="w-1/2 text-white" src={logo}></img>
           </div>
         </div>
         <div className="navbar-center hidden  lg:flex">
@@ -94,9 +94,9 @@ const Header = () => {
             </div>
             <div
               tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+              className="mt-3 z-[1] bg-opacity-80 bg-black card card-compact dropdown-content w-52 shadow"
             >
-              <div className="card-body">
+              <div className="card-body ">
                 <span className="font-bold text-lg">8 Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
@@ -107,7 +107,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end mr-8">
+          <div className="dropdown dropdown-end mr-4">
             <div
               tabIndex={0}
               role="button"
@@ -120,7 +120,7 @@ const Header = () => {
                 />
               </div>
             </div>
-            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul className="menu menu-sm bg-opacity-80 bg-black dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
               <li>
                 <a className="justify-between">
                   Profile
