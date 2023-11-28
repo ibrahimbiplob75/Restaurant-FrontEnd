@@ -1,9 +1,10 @@
+import CarouselSlider from "./CarouselSlider";
 
 
 const Home = () => {
     return (
         <div>
-            <h2>I am in Home now</h2>
+            <CarouselSlider></CarouselSlider>
         </div>
     );
 };
