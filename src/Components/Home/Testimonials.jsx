@@ -1,13 +1,14 @@
 import SectionTitle from "../Shared/SectionTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { useEffect, useState } from "react";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 // Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import { useEffect, useState } from "react";
-// import { Rating } from "@smastrom/react-rating";
-// import "@smastrom/react-rating/style.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
@@ -25,7 +26,15 @@ const Testimonials = () => {
           title={"Testimonials"}
         ></SectionTitle>
 
-        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <Swiper
+          cssMode={true}
+          navigation={true}
+          pagination={true}
+          mousewheel={true}
+          keyboard={true}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          className="mySwiper"
+        >
           {reviews.map((review) => (
             <SwiperSlide key={review._id}>
               <div className="flex flex-col items-center mx-24 my-16">
