@@ -3,8 +3,8 @@
 const Footer = () => {
     return (
       <div className="">
-        <footer className="footer p-10 bg-neutral text-neutral-content">
-          <aside>
+        <footer className="footer  bg-neutral text-neutral-content">
+          <aside className="bg-[#1F2937] w-full p-10">
             <svg
               width="50"
               height="50"
@@ -22,7 +22,7 @@ const Footer = () => {
               Providing reliable tech since 1992
             </p>
           </aside>
-          <nav>
+          <nav className="  w-full p-10">
             <header className="footer-title">Social</header>
             <div className="grid grid-flow-col gap-4">
               <a>
@@ -61,9 +61,9 @@ const Footer = () => {
             </div>
           </nav>
         </footer>
-        <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+        <footer className="footer bg-[#151515] footer-center p-4 text-white  text-base-content">
           <aside>
-            <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+            <p>Copyright © CulinaryCloud. All rights reserved.</p>
           </aside>
         </footer>
       </div>
