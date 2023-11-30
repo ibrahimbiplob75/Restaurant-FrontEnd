@@ -7,6 +7,7 @@ import "./index.css";
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import Home from './Components/Home/Home.jsx';
 import OurMenu from './Components/Menu/OurMenu.jsx';
+import OurShop from './Components/OurShop/OurShop.jsx';
 
 const router = createBrowserRouter([
   {
@@ -16,12 +17,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element:<Home></Home>
+        element: <Home></Home>,
       },
       {
-        path:"/menu",
-        element:<OurMenu></OurMenu>
-      }
+        path: "/menu",
+        element: <OurMenu></OurMenu>,
+      },
+      {
+        path: "/shop/:category",
+        element: <OurShop></OurShop>,
+      },
     ],
   },
 ]);

@@ -8,6 +8,7 @@ import desert_img from "../../assets/menu/dessert-bg.jpeg"
 import SectionTitle from '../Shared/SectionTitle';
 import DataEffect from '../DataEffect/DataEffect';
 import MenuItem from '../Shared/MenuItem';
+import { Link } from 'react-router-dom';
 const OurMenu = () => {
     const [menu]=DataEffect();
     const offered = menu.filter((item) => item.category === "offered");
@@ -53,12 +54,18 @@ const OurMenu = () => {
 
           <div className="grid md:grid-cols-2 gap-10 w-4/5 mx-auto">
             {desserts.map((dessert) => (
-              <MenuItem key={dessert._id} item={dessert}></MenuItem>
+              <MenuItem
+                key={dessert._id}
+                item={dessert}
+                
+              ></MenuItem>
             ))}
           </div>
-          <button className="btn text-center btn-outline border-0 border-b-4 mt-4">
-            order your favourite food
-          </button>
+          <Link to={`/shop/dessert`}>
+            <button className="btn text-center btn-outline border-0 border-b-4 mt-4">
+              order your favourite food
+            </button>
+          </Link>
         </div>
       </section>
     );
