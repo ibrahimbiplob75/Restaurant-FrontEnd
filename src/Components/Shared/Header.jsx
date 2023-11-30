@@ -7,7 +7,7 @@ const Header = () => {
         <Link to="/" >
           <li className="text-2xl m-2">Home</li>
         </Link>
-        <Link to="/">
+        <Link to="/menu">
           <li className="text-2xl m-2">Our Menu</li>
         </Link>
         <Link to="/">
@@ -24,7 +24,7 @@ const Header = () => {
         <Link to="/">
           <li className="text-xl m-2">Home</li>
         </Link>
-        <Link to="/">
+        <Link to="/menu">
           <li className="text-xl m-2">Our Menu</li>
         </Link>
         <Link to="/">

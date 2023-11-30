@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import Home from './Components/Home/Home.jsx';
+import OurMenu from './Components/Menu/OurMenu.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
         path: "/",
         element:<Home></Home>
       },
+      {
+        path:"/menu",
+        element:<OurMenu></OurMenu>
+      }
     ],
   },
 ]);
