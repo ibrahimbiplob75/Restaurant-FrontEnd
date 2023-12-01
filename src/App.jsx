@@ -1,22 +1,23 @@
 
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import './App.css'
 import Header from './Components/Shared/Header'
 import Footer from './Components/Shared/Footer'
 
 function App() {
-  
+  const location=useLocation();
+  console.log(location);
+  const removeHF = location.pathname.includes("login", "signup");
 
   return (
     <>
       <div>
-        <Header></Header>
+        {removeHF || <Header></Header>}
         <Outlet></Outlet>
-        <Footer></Footer>
-        
+        {removeHF || <Footer></Footer>}
       </div>
     </>
-  )
+  );
 }
 
 export default App

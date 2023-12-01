@@ -10,7 +10,7 @@ import OrderTap from "./OrderTap";
 const OurShop = () => {
     const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
     const { category } = useParams();
-    console.log(category)
+    
     const initialIndex = categories.indexOf(category);
     const [tabIndex, setTabIndex] = useState(initialIndex);
     const [menu] = DataEffect();
@@ -31,7 +31,11 @@ const OurShop = () => {
           ></CoverSection>
         </div>
 
-        <Tabs className="text-center m-10" defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+        <Tabs
+          className="text-center m-10"
+          defaultIndex={tabIndex}
+          onSelect={(index) => setTabIndex(index)}
+        >
           <TabList className="uppercase">
             <Tab>Salad</Tab>
             <Tab>Pizza</Tab>
@@ -39,8 +43,8 @@ const OurShop = () => {
             <Tab>Dessert</Tab>
             <Tab>Drinks</Tab>
           </TabList>
-          <TabPanel >
-            <OrderTap items={salad}></OrderTap>
+          <TabPanel>
+            <OrderTap className="border-none" items={salad}></OrderTap>
           </TabPanel>
           <TabPanel>
             <OrderTap items={pizza}></OrderTap>

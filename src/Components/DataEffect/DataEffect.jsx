@@ -6,10 +6,10 @@ const DataEffect = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        fetch("menu.json")
-        .then(res=>res.json())
-        .then(data=> setMenu(data));
-        setLoading(false);
+        fetch("http://localhost:5000/menu",{credentials:"include"})
+          .then((res) => res.json())
+          .then((data) => setMenu(data));
+          setLoading(false);
     },[]);
 
 

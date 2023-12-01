@@ -8,6 +8,8 @@ import ErrorPage from './Components/ErrorPage/ErrorPage.jsx';
 import Home from './Components/Home/Home.jsx';
 import OurMenu from './Components/Menu/OurMenu.jsx';
 import OurShop from './Components/OurShop/OurShop.jsx';
+import Login from './Components/Login/Login.jsx';
+import SignUp from './Components/SignUp/SignUp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,20 @@ const router = createBrowserRouter([
         element: <OurMenu></OurMenu>,
       },
       {
+        path: "/shop",
+        element: <OurShop></OurShop>,
+      },
+      {
         path: "/shop/:category",
         element: <OurShop></OurShop>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
       },
     ],
   },

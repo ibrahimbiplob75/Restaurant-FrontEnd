@@ -135,6 +135,11 @@ const Header = () => {
               </li>
             </ul>
           </div>
+          <Link to="/login">
+            <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+              Log-In
+            </button>
+          </Link>
         </div>
       </div>
     );
