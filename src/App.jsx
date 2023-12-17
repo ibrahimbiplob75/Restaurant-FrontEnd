@@ -7,7 +7,7 @@ import Footer from './Components/Shared/Footer'
 function App() {
   const location=useLocation();
   console.log(location);
-  const removeHF = location.pathname.includes("login", "signup");
+  const removeHF = location.pathname.includes("signup") || location.pathname.includes("login");
 
   return (
     <>

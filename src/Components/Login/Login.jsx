@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import {
@@ -6,24 +6,57 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthProvider } from '../../ContextProvider/ContextProvider';
+import Swal from 'sweetalert2';
+
 
 const Login = () => {
-    const [disabled, setDisabled] = useState(true);
+    
+   
+    const { signIn } = useContext(AuthProvider);
     
     useEffect(()=>{
         loadCaptchaEnginge(6); 
     },[])
-    const handleLogin=()=>{
-        
-    }
-    const handleValidatecaptcha=(event)=>{
-        let user_captcha_value=event.target.value;
-         if (validateCaptcha(user_captcha_value) == true) {
-           setDisabled(false);
-         } else {
-           setDisabled(true);
-         }
-    }
+
+    
+    const handleValidatecaptcha = (event) => {
+      const loginButton = document.querySelector(".capt_btn");
+     
+      const user_captcha_value = event.target.value;
+      if (validateCaptcha(user_captcha_value)) {
+         loginButton.classList.remove("hidden");
+      
+      } else {
+          loginButton.classList.add("hidden");
+      }
+    };
+
+    const handleLogin = (event) => {
+     event.preventDefault();
+     const data = event.target;
+     const email = data.email.value;
+     const password = data.password.value;
+     signIn(email, password)
+       .then(() => {
+         Swal.fire({
+           position: "center",
+           icon: "success",
+           title: "You have Logged In successfully",
+           showConfirmButton: false,
+           timer: 1500,
+         });
+       })
+       .catch(() => {
+         Swal.fire({
+           icon: "error",
+           title: "Oops...",
+           text: "Something went wrong!",
+           footer: '<a href="#">Why do I have this issue?</a>',
+         });
+       });
+    };
+   
     return (
       <>
         <Helmet>
@@ -68,6 +101,7 @@ const Login = () => {
                     </a>
                   </label>
                 </div>
+
                 <div className="form-control">
                   <label className="label">
                     <LoadCanvasTemplate />
@@ -76,18 +110,17 @@ const Login = () => {
                     type="text"
                     name="captcha"
                     onBlur={handleValidatecaptcha}
-                    placeholder="type the captcha above"
+                    placeholder="Type the captcha above"
                     className="input input-bordered"
                   />
-                  
                 </div>
 
                 <div className="form-control mt-6">
                   <input
-                    disabled={false}
-                    className="btn btn-primary"
+                    className="btn btn-primary capt_btn hidden"
                     type="submit"
                     value="Login"
+                    
                   />
                 </div>
               </form>

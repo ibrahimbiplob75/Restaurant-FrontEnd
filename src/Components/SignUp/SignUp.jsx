@@ -2,17 +2,40 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { AuthProvider } from "../../ContextProvider/ContextProvider";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-
+   const {
+     register,
+     handleSubmit,
+     formState: { errors },
+   } = useForm();
   const {createUser}=useContext(AuthProvider);
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    const email=data.get("email");
-    const password=data.get("password");
-    createUser(email,password)
+  const onSubmit = (data) => {
+ 
+    console.log(data);
+    createUser(data.email,data.password)
+    .then(() => {
+      
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your registation have successfully done!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      
+    }).catch(() => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+      
+    });
 
   };
 
@@ -32,21 +55,21 @@ const SignUp = () => {
             </p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form  className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
-                //   {...register("name", { required: true })}
+                  {...register("name", { required: true })}
                   name="name"
                   placeholder="Name"
                   className="input input-bordered"
                 />
-                {/* {errors.name && (
+                {errors.name && (
                   <span className="text-red-600">Name is required</span>
-                )} */}
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -54,13 +77,13 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                //   {...register("photoURL", { required: true })}
+                  {...register("photoURL", { required: true })}
                   placeholder="Photo URL"
                   className="input input-bordered"
                 />
-                {/* {errors.photoURL && (
+                {errors.photoURL && (
                   <span className="text-red-600">Photo URL is required</span>
-                )} */}
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -68,14 +91,14 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
-                //   {...register("email", { required: true })}
+                  {...register("email", { required: true })}
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
                 />
-                {/* {errors.email && (
+                {errors.email && (
                   <span className="text-red-600">Email is required</span>
-                )} */}
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -83,16 +106,17 @@ const SignUp = () => {
                 </label>
                 <input
                   type="password"
-                //   {...register("password", {
-                //     required: true,
-                //     minLength: 6,
-                //     maxLength: 20,
-                //     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                //   })}
+                  name="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   placeholder="password"
                   className="input input-bordered"
                 />
-                {/* {errors.password?.type === "required" && (
+                {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
                 )}
                 {errors.password?.type === "minLength" && (
@@ -108,7 +132,7 @@ const SignUp = () => {
                     Password must have one Uppercase one lower case, one number
                     and one special character.
                   </p>
-                )} */}
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
