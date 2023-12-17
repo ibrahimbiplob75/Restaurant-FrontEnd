@@ -1,8 +1,20 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import { AuthProvider } from "../../ContextProvider/ContextProvider";
 
 const SignUp = () => {
-  const onSubmit = (data) => {};
+
+  const {createUser}=useContext(AuthProvider);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const email=data.get("email");
+    const password=data.get("password");
+    createUser(email,password)
+
+  };
 
   return (
     <>

@@ -9,11 +9,12 @@ import {
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
+    
     useEffect(()=>{
         loadCaptchaEnginge(6); 
     },[])
     const handleLogin=()=>{
-
+        
     }
     const handleValidatecaptcha=(event)=>{
         let user_captcha_value=event.target.value;
