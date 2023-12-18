@@ -11,6 +11,7 @@ import OurShop from './Components/OurShop/OurShop.jsx';
 import Login from './Components/Login/Login.jsx';
 import SignUp from './Components/SignUp/SignUp.jsx';
 import ContextProvider from './ContextProvider/ContextProvider.jsx';
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/shop/:category",
-        element: <OurShop></OurShop>,
+        element: (
+          <PrivateRoute>
+            <OurShop></OurShop>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signup",

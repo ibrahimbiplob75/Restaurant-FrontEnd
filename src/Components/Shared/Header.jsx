@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/Res_Logo.png";
+import { useContext } from "react";
+import { AuthProvider } from "../../ContextProvider/ContextProvider";
+import Swal from "sweetalert2";
 
 const Header = () => {
+  const {user,LogOut}=useContext(AuthProvider)
+
+    const logOut = () => {
+      LogOut()
+        .then(() => {
+          Swal.fire({
+            title: "Success!",
+            text: "You Have Logged Out",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          });
+        });
+    };
     const menu = (
       <>
         <Link to="/" >
@@ -107,39 +134,42 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end mr-4">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+          {user ? (
+            <div className="dropdown dropdown-end mr-4">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                </div>
               </div>
+              <ul className="menu menu-sm bg-opacity-80 bg-black dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <Link onClick={logOut}>Logout</Link>
+                </li>
+              </ul>
             </div>
-            <ul className="menu menu-sm bg-opacity-80 bg-black dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-          <Link to="/login">
-            <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-              Log-In
-            </button>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                Log-In
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     );

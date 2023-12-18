@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../../ContextProvider/ContextProvider";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
@@ -8,36 +8,43 @@ import { useForm } from "react-hook-form";
 const SignUp = () => {
    const {
      register,
+     reset,
      handleSubmit,
      formState: { errors },
    } = useForm();
-  const {createUser}=useContext(AuthProvider);
-
+  const { createUser, updateUserProfile } = useContext(AuthProvider);
+   const navigate = useNavigate();
   const onSubmit = (data) => {
  
     console.log(data);
     createUser(data.email,data.password)
     .then(() => {
-      
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your registation have successfully done!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      
-    }).catch(() => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-        footer: '<a href="#">Why do I have this issue?</a>',
-      });
-      
-    });
 
-  };
+        updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              })
+            .catch(() => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#">Why do I have this issue?</a>',
+            });
+          });
+      
+      
+
+    });
+  }
 
   return (
     <>
