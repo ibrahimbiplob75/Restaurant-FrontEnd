@@ -8,6 +8,8 @@ import {
 } from "react-simple-captcha";
 import { AuthProvider } from '../../ContextProvider/ContextProvider';
 import Swal from 'sweetalert2';
+import logImg from "../../assets/others/authentication2.png"
+import SocialLogin from '../Shared/SocialLogin';
 
 
 const Login = () => {
@@ -62,23 +64,31 @@ const Login = () => {
          });
        });
     };
+     const backgroundImageUrl = "https://i.ibb.co/SQLKxz7/authentication.png"; // Replace with the actual image path
+
+     const containerStyle = {
+       backgroundImage: `url(${backgroundImageUrl})`,
+       backgroundSize: "cover",
+       backgroundPosition: "center",
+     };
    
     return (
       <>
         <Helmet>
           <title>Bistro Boss | Login</title>
         </Helmet>
-        <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content flex-col md:flex-row-reverse">
-            <div className="text-center md:w-1/2 lg:text-left">
-              <h1 className="text-5xl font-bold">Login now!</h1>
-              <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                assumenda excepturi exercitationem quasi. In deleniti eaque aut
-                repudiandae et a id nisi.
-              </p>
-            </div>
-            <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+              <div className="hero min-h-screen" style={containerStyle}>
+        <div
+          className="hero-content flex-col lg:flex-row shadow-2xl rounded-xl w-2/3"
+          style={containerStyle}
+        >
+          <div>
+            <img src={logImg} alt="" />
+          </div>
+          <div className="text-center ">
+            <h1 className="text-5xl font-bold m-5">Sign up now!</h1>
+
+            <div className="card flex-shrink-0 w-full max-w shadow-2xl bg-base-100">
               <form onSubmit={handleLogin} className="card-body">
                 <div className="form-control">
                   <label className="label">
@@ -123,21 +133,21 @@ const Login = () => {
 
                 <div className="form-control mt-6">
                   <input
-                    className="btn btn-primary capt_btn hidden"
+                    className="btn bg-[#D1A054] border-none text-white btn-primary capt_btn hidden"
                     type="submit"
                     value="Login"
-                    
                   />
                 </div>
               </form>
-              <p>
-                <small>
+              <p className="text-center mb-4">
+                <small className="text-[#D1A054]">
                   New Here? <Link to="/signup">Create an account</Link>{" "}
                 </small>
               </p>
-              {/* <SocialLogin></SocialLogin> */}
+               <SocialLogin></SocialLogin> 
             </div>
           </div>
+        </div>
         </div>
       </>
     );
