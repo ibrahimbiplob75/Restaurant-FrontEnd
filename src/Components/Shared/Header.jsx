@@ -131,9 +131,11 @@ const Header = () => {
                 <span className="font-bold text-lg">{cart.length} Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+                  <Link to="/dashboard/home" className="w-full">
+                    <button className="btn btn-primary btn-block">
+                      View cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

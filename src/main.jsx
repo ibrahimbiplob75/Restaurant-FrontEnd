@@ -13,6 +13,8 @@ import SignUp from './Components/SignUp/SignUp.jsx';
 import ContextProvider from './ContextProvider/ContextProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 
+import Dashboard from "./Components/Dashboard/Dashboard.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,11 +51,28 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/dashboard/home",
+        element: <DashHome></DashHome>,
+      },
+      {
+        path: "/dashboard/cart",
+        element:<Cart></Cart>,
+      },
+    ],
+  },
 ]);
 import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import Cart from './Components/Dashboard/Cart.jsx';
+import DashHome from './Components/Dashboard/DashHome.jsx';
 
 const queryClient = new QueryClient();
 
