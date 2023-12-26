@@ -50,13 +50,21 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ContextProvider>
-      <div className="max-w mx-2">
-        <RouterProvider router={router} />
-      </div>
-    </ContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ContextProvider>
+        <div className="max-w mx-2">
+          <RouterProvider router={router} />
+        </div>
+      </ContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

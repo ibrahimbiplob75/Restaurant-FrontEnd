@@ -1,7 +1,63 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthProvider } from '../../ContextProvider/ContextProvider';
+import Swal from 'sweetalert2';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { secureAxios } from '../../AxiosSecure/UseAxiosSecure';
+import UseCart from '../../UseCart/UseCart';
+
 
 const FoodCard = ({ item }) => {
      const { name, image, price, recipe, _id } = item;
+     const {user}=useContext(AuthProvider);
+     const navigate = useNavigate();
+     const location = useLocation();
+     const [,refetch]=UseCart();
+
+     const from = location.state?.from?.pathname || "/";
+
+     const handleAddToCart= item=>{
+         if(user && user.email){
+         
+          secureAxios
+            .post("/carts", {
+              menuId: _id,
+              email: user.email,
+              name: name,
+              img: image,
+              price: price,
+            })
+            .then(function (response) {
+              if (response.data.insertedId) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: `${name} added to the cart`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                refetch();
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });;
+         }
+         else{
+           Swal.fire({
+             title: "You have to Login",
+             text: "Do you want to Login?",
+             icon: "warning",
+             showCancelButton: true,
+             confirmButtonColor: "#3085d6",
+             cancelButtonColor: "#d33",
+             confirmButtonText: "Yes, Go!",
+           }).then((result) => {
+             if (result.isConfirmed) {
+               navigate("/login", { state:{form:location }});
+             }
+           });
+         }
+     }
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
       <figure>
