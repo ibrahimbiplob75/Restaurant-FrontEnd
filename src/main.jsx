@@ -53,7 +53,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -62,8 +66,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/cart",
-        element:<Cart></Cart>,
+        element: <Cart></Cart>,
       },
+      {
+        path:"/dashboard/allusers",
+        element:<AllUsers></AllUsers>
+      }
     ],
   },
 ]);
@@ -73,6 +81,7 @@ import {
 } from "@tanstack/react-query";
 import Cart from './Components/Dashboard/Cart.jsx';
 import DashHome from './Components/Dashboard/DashHome.jsx';
+import AllUsers from './Components/Dashboard/Admin/AllUsers.jsx';
 
 const queryClient = new QueryClient();
 

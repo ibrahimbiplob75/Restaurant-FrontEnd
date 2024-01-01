@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { AuthProvider } from '../../ContextProvider/ContextProvider';
 import Swal from 'sweetalert2';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { secureAxios } from '../../AxiosSecure/UseAxiosSecure';
 import UseCart from '../../UseCart/UseCart';
+import UseAxiosSecure from '../../AxiosSecure/UseAxiosSecure';
 
 
 const FoodCard = ({ item }) => {
@@ -12,6 +12,7 @@ const FoodCard = ({ item }) => {
      const navigate = useNavigate();
      const location = useLocation();
      const [,refetch]=UseCart();
+     const [secureAxios]=UseAxiosSecure()
 
      const from = location.state?.from?.pathname || "/";
 

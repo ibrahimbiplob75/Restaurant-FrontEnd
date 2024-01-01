@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import logImg from  "../../assets/others/authentication2.png";
 import SocialLogin from "../Shared/SocialLogin";
+import AxiosPublic from "../../AxiosPublic/AxiosPublic";
 
 const SignUp = () => {
    const {
@@ -16,23 +17,35 @@ const SignUp = () => {
    } = useForm();
   const { createUser, updateUserProfile } = useContext(AuthProvider);
    const navigate = useNavigate();
+   const publicAxios=AxiosPublic();
   const onSubmit = (data) => {
  
     console.log(data);
     createUser(data.email,data.password)
     .then(() => {
-
+        
         updateUserProfile(data.name, data.photoURL)
         .then(() => {
-                reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User created successfully.",
-                  showConfirmButton: false,
-                  timer: 1500,
+                const userInfo = {
+                  name: data.name,
+                  email: data.email,
+                  photo: data.photoURL,
+                };
+                publicAxios.post("/users", userInfo).then((res) => {
+                  if (res.data.insertedId) {
+                   reset();
+                    Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "User created successfully.",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    navigate("/");
+                  }
                 });
-                navigate("/");
+
+                
               })
             .catch(() => {
               Swal.fire({
