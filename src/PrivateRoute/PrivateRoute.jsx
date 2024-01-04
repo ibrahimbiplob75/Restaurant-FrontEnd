@@ -3,10 +3,10 @@ import { Navigate, useLocation } from "react-router";
 import { AuthProvider } from "../ContextProvider/ContextProvider";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthProvider);
+  const { user, loader } = useContext(AuthProvider);
   const location = useLocation();
 
-  if (loading) {
+  if (loader) {
     return <progress className="progress w-56"></progress>;
   }
 

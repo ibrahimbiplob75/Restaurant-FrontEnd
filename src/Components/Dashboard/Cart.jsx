@@ -1,13 +1,14 @@
 import { FaTrashAlt } from "react-icons/fa";
 import UseCart from "../../UseCart/UseCart";
-import UseAxiosSecure from "../../AxiosSecure/UseAxiosSecure";
 import Swal from "sweetalert2";
+import AxiosPublic from "../../AxiosPublic/AxiosPublic";
 
 
 const Cart = () => {
     const [cart, refetch] = UseCart();
+    const [axiosPublic]=AxiosPublic()
     const totalPrice= cart.reduce((sumPrice,item) =>{return sumPrice+ item.price},0);
-    const axiosSecure=UseAxiosSecure();
+  
     const hanadleDelete=(id)=>{
         Swal.fire({
           title: "Are you sure?",
@@ -19,8 +20,7 @@ const Cart = () => {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
-            axiosSecure.delete(`/carts/${id}`)
-            .then((res) => {
+            axiosPublic.delete(`/carts/${id}`).then((res) => {
               if (res.data.deletedCount) {
                 Swal.fire({
                   title: "Deleted!",

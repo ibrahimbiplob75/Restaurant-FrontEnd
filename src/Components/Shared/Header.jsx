@@ -6,25 +6,17 @@ import Swal from "sweetalert2";
 import UseCart from "../../UseCart/UseCart";
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../../AxiosSecure/UseAxiosSecure";
+import AxiosPublic from "../../AxiosPublic/AxiosPublic";
 
 
 const Header = () => {
   const {user,LogOut}=useContext(AuthProvider);
   const [cart]=UseCart();
-  const [AxiosSecure] = UseAxiosSecure();
+  const [axiosPublic] = AxiosPublic();
 
   
-  const response = AxiosSecure.get(`/users?email=${user?.email}`);
-      
-   
+  const response = axiosPublic.get(`/users?email=${user?.email}`);
 
- 
-
-
-
-  
- 
-   
 
     const logOut = () => {
       LogOut()

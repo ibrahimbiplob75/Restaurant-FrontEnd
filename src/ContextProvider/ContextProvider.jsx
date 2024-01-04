@@ -6,12 +6,15 @@ import {
   signOut,
   updateProfile,
   GoogleAuthProvider,
+  deleteUser,
   signInWithPopup,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import AxiosPublic from "../AxiosPublic/AxiosPublic";
 
 export const AuthProvider= createContext(null);
 const ContextProvider = ({children}) => {
+  const [publicAxios] = AxiosPublic();
     const [user,setUser]=useState(null);
     const [loader, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
@@ -39,6 +42,10 @@ const ContextProvider = ({children}) => {
           photoURL: photo,
         });
       }
+      
+      const DeleteUser=()=>{
+        deleteUser(user);
+      }
 
       const LogOut=()=>{
         signOut(auth);
@@ -47,6 +54,18 @@ const ContextProvider = ({children}) => {
       useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth,currentUser=>{
             setUser(currentUser);
+            if(currentUser){
+              const userInfo={email:currentUser.email}
+              publicAxios.post("/jwt", userInfo)
+              .then((res)=>{
+                if(res.data.token){
+                  localStorage.setItem("Access-token",res.data.token);
+                }
+              });
+            }
+            else{
+              localStorage.removeItem("Access-token");
+            }
             console.log("Current user",currentUser);
             setLoading(false);
         })
@@ -63,6 +82,7 @@ const ContextProvider = ({children}) => {
       LogOut,
       updateUserProfile,
       GmailLogin,
+      DeleteUser,
     };
     return (
         <AuthProvider.Provider value={authInfo}>

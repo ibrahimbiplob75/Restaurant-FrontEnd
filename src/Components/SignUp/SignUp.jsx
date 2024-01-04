@@ -17,7 +17,7 @@ const SignUp = () => {
    } = useForm();
   const { createUser, updateUserProfile } = useContext(AuthProvider);
    const navigate = useNavigate();
-   const publicAxios=AxiosPublic();
+   const [publicAxios]=AxiosPublic();
   const onSubmit = (data) => {
  
     console.log(data);
@@ -25,34 +25,32 @@ const SignUp = () => {
     .then(() => {
         
         updateUserProfile(data.name, data.photoURL)
-        .then(() => {
-                const userInfo = {
-                  name: data.name,
-                  email: data.email,
-                  photo: data.photoURL,
-                };
-                publicAxios.post("/users", userInfo).then((res) => {
-                  if (res.data.insertedId) {
-                   reset();
-                    Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "User created successfully.",
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                    navigate("/");
-                  }
+          .then(() => {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photo: data.photoURL,
+            };
+            publicAxios.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
                 });
-
-                
-              })
-            .catch(() => {
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Why do I have this issue?</a>',
+                navigate("/");
+              }
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer: '<a href="#">Why do I have this issue?</a>',
             });
           });
       
@@ -109,6 +107,7 @@ const SignUp = () => {
                     type="text"
                     {...register("photoURL", { required: true })}
                     placeholder="Photo URL"
+                    name="photoURL"
                     className="input input-bordered"
                   />
                   {errors.photoURL && (

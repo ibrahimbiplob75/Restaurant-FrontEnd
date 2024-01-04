@@ -69,9 +69,21 @@ const router = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
-        path:"/dashboard/allusers",
-        element:<AllUsers></AllUsers>
-      }
+        path: "/dashboard/allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addItem",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);
@@ -82,6 +94,9 @@ import {
 import Cart from './Components/Dashboard/Cart.jsx';
 import DashHome from './Components/Dashboard/DashHome.jsx';
 import AllUsers from './Components/Dashboard/Admin/AllUsers.jsx';
+import AdminRoute from './PrivateRoute/AdminRoute.jsx';
+import AddItem from './Components/Dashboard/AddItem/AddItem.jsx';
+
 
 const queryClient = new QueryClient();
 

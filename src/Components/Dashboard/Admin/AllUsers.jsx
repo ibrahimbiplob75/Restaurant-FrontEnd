@@ -3,10 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../../../AxiosSecure/UseAxiosSecure";
+import { useContext } from "react";
+import { AuthProvider } from "../../../ContextProvider/ContextProvider";
+
 
 
 const AllUsers = () => {
   const [AxiosSecure] = UseAxiosSecure();
+  const {DeleteUser}=useContext(AuthProvider)
 
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -17,10 +21,58 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (user) => {
-    
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Admin!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+          AxiosSecure.patch(`/user/admin/${user._id}`).then((res)=>{
+            if(res.data.modifiedCount>0){
+              refetch();
+              Swal.fire({
+                title: "Admin!",
+                text: `${user.name} is Admin now`,
+                icon: "success",
+              });
+            }
+            
+          })
+          
+      }
+    });
+  
+  }
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        AxiosSecure.delete(`/users/${user}`).then(()=>{
+          refetch();
+          DeleteUser();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        })
+        
+      }
+    });
   };
 
-  const handleDelete = (user) => {};
 
   return (
     <div className="w-full">
@@ -60,7 +112,7 @@ const AllUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleDelete(user._id)}
                     className="btn btn-ghost bg-red-600  text-white"
                   >
                     <FaTrashAlt></FaTrashAlt>
