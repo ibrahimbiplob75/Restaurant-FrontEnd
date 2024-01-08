@@ -2,6 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import UseCart from "../../UseCart/UseCart";
 import Swal from "sweetalert2";
 import AxiosPublic from "../../AxiosPublic/AxiosPublic";
+import { Link } from "react-router-dom";
 
 
 const Cart = () => {
@@ -39,7 +40,15 @@ const Cart = () => {
         <div className="flex flex-row justify-evenly items-center">
           <h2 className="text-3xl">Your Total Item {cart.length}</h2>
           <h2 className="text-3xl">Total Price {totalPrice}</h2>
-          <button className="btn btn-secondary">Pay Now</button>
+          {cart.length > 0 ? (
+            <Link to="/dashboard/payment">
+              <button className="btn btn-secondary">Pay Now</button>
+            </Link>
+          ) : (
+            <button disabled className="btn btn-secondary">
+              Pay Now
+            </button>
+          )}
         </div>
         <div className="overflow-x-auto mt-5">
           <table className="table">
@@ -91,13 +100,15 @@ const Cart = () => {
                   </td>
                   <td>Purple</td>
                   <th>
-                    <button onClick={()=>hanadleDelete(item._id)} className="btn btn-ghost btn-lg">
-                        <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                    <button
+                      onClick={() => hanadleDelete(item._id)}
+                      className="btn btn-ghost btn-lg"
+                    >
+                      <FaTrashAlt className="text-red-600"></FaTrashAlt>
                     </button>
                   </th>
                 </tr>
               ))}
-              
             </tbody>
           </table>
         </div>

@@ -8,6 +8,7 @@ import UseAxiosSecure from "../../../AxiosSecure/UseAxiosSecure";
 
 const imgApi=import.meta.env.VITE_IMGBB_API_KEY;
 const hostApi = `https://api.imgbb.com/1/upload?key=${imgApi}`;
+
 const AddItem = () => {
   const { register, handleSubmit, reset } = useForm();
   const [axiosPublic]=AxiosPublic()
@@ -31,7 +32,14 @@ const AddItem = () => {
       const result=await axiosSecure.post("/menu",menuItem).then(
         (res)=>{
           if(res.data.insertedId){
-            console.log("done")
+            reset();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${data.name} added to product`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           }
         }
       );
@@ -67,12 +75,12 @@ const AddItem = () => {
               className="select select-bordered"
             >
               <option disabled>Pick One</option>
-              <option>Pizza</option>
-              <option>Soup</option>
-              <option>Salad</option>
-              <option>Dessert</option>
-              <option>Desi</option>
-              <option>Drinks</option>
+              <option>pizza</option>
+              <option>soup</option>
+              <option>salad</option>
+              <option>dessert</option>
+              <option>desi</option>
+              <option>drinks</option>
             </select>
           </div>
           <div className="form-control w-full ml-4">

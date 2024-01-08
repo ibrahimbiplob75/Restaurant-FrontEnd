@@ -12,7 +12,7 @@ import Login from './Components/Login/Login.jsx';
 import SignUp from './Components/SignUp/SignUp.jsx';
 import ContextProvider from './ContextProvider/ContextProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
-
+import ManageItems from './Components/ManageItems/ManageItems.jsx';
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 
 const router = createBrowserRouter([
@@ -69,6 +69,15 @@ const router = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
+        path: "/dashboard/payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "/dashboard/OrderHistory",
+        element: <OrderHistory></OrderHistory>,
+      },
+      //Admin route
+      {
         path: "/dashboard/allusers",
         element: (
           <AdminRoute>
@@ -84,6 +93,24 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {
+        path: "/dashboard/manageitems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/item/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+      },
     ],
   },
 ]);
@@ -96,6 +123,9 @@ import DashHome from './Components/Dashboard/DashHome.jsx';
 import AllUsers from './Components/Dashboard/Admin/AllUsers.jsx';
 import AdminRoute from './PrivateRoute/AdminRoute.jsx';
 import AddItem from './Components/Dashboard/AddItem/AddItem.jsx';
+import UpdateItem from './Components/ManageItems/UpdateItem.jsx';
+import Payment from './Components/Dashboard/Payment/Payment.jsx';
+import OrderHistory from './Components/Dashboard/Payment/OrderHistory.jsx';
 
 
 const queryClient = new QueryClient();

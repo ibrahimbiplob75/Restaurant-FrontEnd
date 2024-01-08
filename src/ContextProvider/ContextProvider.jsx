@@ -61,6 +61,7 @@ const ContextProvider = ({children}) => {
                 if(res.data.token){
                   localStorage.setItem("Access-token",res.data.token);
                 }
+                setLoading(false);
               });
             }
             else{

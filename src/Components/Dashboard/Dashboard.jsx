@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBookmark, FaCalendar, FaHome, FaReact,FaAccusoft, FaShoppingCart, FaTicketAlt, FaUtensils, FaWallet, FaBook, FaUsers } from 'react-icons/fa';
+import { FaBookmark, FaCalendar, FaHome, FaReact,FaAccusoft, FaShoppingCart, FaTicketAlt, FaUtensils, FaWallet, FaBook, FaUsers, FaListAlt } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import CheckAdmin from '../../CheckAdmin/CheckAdmin';
 
@@ -28,6 +28,13 @@ const Dashboard = () => {
                   <FaShoppingCart></FaShoppingCart>My Cart
                 </NavLink>
               </li>
+
+              <li className="mt-4 text-white bg-green-800 rounded-xl">
+                <NavLink to="/dashboard/OrderHistory">
+                  <FaListAlt></FaListAlt> Order History
+                </NavLink>
+              </li>
+
               <li className="mt-4 text-white bg-green-800 rounded-xl">
                 <NavLink to="/dashboard/reservation">
                   <FaReact></FaReact>Review
