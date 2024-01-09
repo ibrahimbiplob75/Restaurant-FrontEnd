@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthProvider } from '../../../ContextProvider/ContextProvider';
 import UseAxiosSecure from '../../../AxiosSecure/UseAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { FaTrashAlt } from 'react-icons/fa';
+
 
 const OrderHistory = () => {
     const {user}=useContext(AuthProvider);
