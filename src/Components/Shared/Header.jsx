@@ -42,7 +42,7 @@ const Header = () => {
     };
     const menu = (
       <>
-        <Link to="/" >
+        <Link to="/">
           <li className="text-2xl m-2">Home</li>
         </Link>
         <Link to="/menu">
@@ -51,9 +51,9 @@ const Header = () => {
         <Link to="/shop">
           <li className="text-2xl m-2">Our Shop</li>
         </Link>
-        <Link to="/">
+        <a href="https://ibrahimbiplob.me/" target="_blank">
           <li className="text-2xl m-2">Contact Us</li>
-        </Link>
+        </a>
       </>
     );
 

@@ -1,12 +1,12 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
-import slider1 from "../../assets/home/01.jpg"
-import slider2 from "../../assets/home/02.jpg";
-import slider3 from "../../assets/home/03.png"
-import slider4 from "../../assets/home/04.jpg";
-import slider5 from "../../assets/home/05.png";
-import slider6 from "../../assets/home/06.png";
+import slider1 from "../../assets/home/1.png"
+import slider2 from "../../assets/home/2.png";
+import slider3 from "../../assets/home/3.png"
+import slider4 from "../../assets/home/4.png";
+import slider5 from "../../assets/home/5.png";
+import slider6 from "../../assets/home/6.png";
 
 const CarouselSlider = () => {
   return (
