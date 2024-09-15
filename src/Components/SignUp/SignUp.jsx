@@ -20,7 +20,7 @@ const SignUp = () => {
    const [publicAxios]=AxiosPublic();
   const onSubmit = (data) => {
  
-    console.log(data);
+    // console.log(data);
     createUser(data.email,data.password)
     .then(() => {
         
@@ -30,8 +30,10 @@ const SignUp = () => {
               name: data.name,
               email: data.email,
               photo: data.photoURL,
+              role:"User"
             };
             publicAxios.post("/users", userInfo).then((res) => {
+              // console.log(res)
               if (res.data.insertedId) {
                 reset();
                 Swal.fire({

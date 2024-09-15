@@ -37,29 +37,28 @@ const Cart = () => {
     }
     return (
       <div>
-        <div className="flex flex-row justify-evenly items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 text-center items-center justify-center gap-6">
           <h2 className="text-3xl">Your Total Item {cart.length}</h2>
-          <h2 className="text-3xl">Total Price {totalPrice}</h2>
-          {cart.length > 0 ? (
-            <Link to="/dashboard/payment">
-              <button className="btn btn-secondary">Pay Now</button>
-            </Link>
-          ) : (
-            <button disabled className="btn btn-secondary">
-              Pay Now
-            </button>
-          )}
+
+          <div className="flex flex-row gap-5 items-center text-center">
+            <h2 className="text-3xl">Total Price {totalPrice}</h2>
+            {cart.length > 0 ? (
+              <Link to="/dashboard/payment">
+                <button className="btn btn-secondary">Pay Now</button>
+              </Link>
+            ) : (
+              <button disabled className="btn btn-secondary">
+                Pay Now
+              </button>
+            )}
+          </div>
         </div>
         <div className="overflow-x-auto mt-5">
           <table className="table">
             {/* head */}
             <thead>
               <tr>
-                <th>
-                  {/* <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label> */}
-                </th>
+                
                 <th>Item</th>
                 <th>Price</th>
                 <th>Favorite Color</th>
@@ -69,11 +68,6 @@ const Cart = () => {
             <tbody>
               {cart.map((item) => (
                 <tr key={item._id}>
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">

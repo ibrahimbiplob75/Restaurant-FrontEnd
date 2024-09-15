@@ -12,7 +12,6 @@ const UseCart = () => {
       queryKey: ["cart", user?.email],
       queryFn: async () => {
         const res = await axiosPublic.get(`/carts?email=${user.email}`);
-        console.log("Data of Cart",res)
         return res.data;
       },
     });
