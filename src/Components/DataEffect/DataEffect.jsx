@@ -9,7 +9,7 @@ const DataEffect = () => {
     // const [loading, setLoading] = useState(true);
 
     // useEffect(()=>{
-    //     fetch("http://localhost:5000/menu",{credentials:"include"})
+    //     fetch("https://restuarent-server.vercel.app/menu",{credentials:"include"})
     //       .then((res) => res.json())
     //       .then((data) => setMenu(data));
     //       setLoading(false);

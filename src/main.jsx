@@ -53,6 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
+    errorElement: <ErrorPage />,
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
@@ -109,7 +110,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(`https://restuarent-server.vercel.app/menu/${params.id}`),
       },
     ],
   },
